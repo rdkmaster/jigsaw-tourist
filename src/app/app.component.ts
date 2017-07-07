@@ -7,7 +7,8 @@ import {Component, Renderer2, ViewContainerRef} from '@angular/core';
 })
 export class AppComponent {
 
-  title = 'jigsaw';
+  beginDate = 'now-1d';
+  endDate = 'now';
 
   constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2) {
   }
