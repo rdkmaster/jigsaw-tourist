@@ -23,6 +23,21 @@ export class AppComponent {
 
   selectedChoice = this.quickChoices[0];
 
+  businessTypes = [{label: 'LTE用户面', closable: false}, {label: 'LTE控制面', closable: false}];
+
+  displayTypes = [{label: '合并', id: '1'}, {label: '分表', id: '2'}];
+
+  displayType = this.displayTypes[0];
+
+  interfaces = [{label: 'S1-U', closable: false}, {label: 'S2-U', closable: false}];
+
+  userTypes = [{label: 'IMSI', closable: false}, {label: 'MSISDN', closable: false}];
+  // TODO fix#77
+  // selectUserType = [this.userTypes[0]];
+  selectUserType = new ArrayCollection([{label: 'IMSI', closable: false}]);
+
+  maxRecord = 1000;
+
   constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2) {
   }
   quickChoiceChange(quickChoice) {
@@ -46,5 +61,13 @@ export class AppComponent {
       {label: TimeService.getFormatDate(this.beginDate, TimeGr.date), closable: false},
       {label: TimeService.getFormatDate(this.endDate, TimeGr.date), closable: false}
     ]);
+  }
+
+  displayTypeChange(displayType) {
+    console.log(displayType)
+  }
+
+  doSearch() {
+
   }
 }
