@@ -15,5 +15,10 @@
       tileOptionWidth="100px">
     </jigsaw-tile-select>
   </jigsaw-combo-select>
+  <span>快速选择:</span>
+  <jigsaw-radio-group (valueChange)="quickChoiceChange($event)"
+                      [data]="quickChoices"
+                      trackItemBy="id" [(value)]="selectedChoice">
+  </jigsaw-radio-group>
 </div>
 
