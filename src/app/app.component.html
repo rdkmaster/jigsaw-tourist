@@ -66,4 +66,7 @@
   <jigsaw-input [(value)]="maxRecord" height="32px"></jigsaw-input>
   <jigsaw-button (click)="doSearch()">查询</jigsaw-button>
 </div>
+<div class="result">
+  <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData"></jigsaw-table>
+</div>
 

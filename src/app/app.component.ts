@@ -1,5 +1,6 @@
 import {Component, Renderer2, ViewContainerRef} from '@angular/core';
-import {ArrayCollection, TimeGr, TimeService} from '@rdkmaster/jigsaw';
+import {ArrayCollection, TableData, TimeGr, TimeService} from '@rdkmaster/jigsaw';
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'app-root',
@@ -38,7 +39,11 @@ export class AppComponent {
 
   maxRecord = 1000;
 
-  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2) {
+  tableData: TableData;
+
+  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2 ,private http: Http) {
+    this.tableData = new TableData();
+    this.tableData.http = http;
   }
   quickChoiceChange(quickChoice) {
     switch (quickChoice.id) {
@@ -68,6 +73,6 @@ export class AppComponent {
   }
 
   doSearch() {
-
+    this.tableData.fromAjax('mock-data/table/data.json');
   }
 }
