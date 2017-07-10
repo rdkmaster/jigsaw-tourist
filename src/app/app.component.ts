@@ -187,23 +187,4 @@ export class AppComponent {
     tableColumnDefine.push({target: row, visible: false});
   }
 
-  // constructor() {
-  //   this.pageable = new PageableTableData(http, {
-  //     url: 'http://localhost:4200/mock-data/table/paging-data.json',
-  //     params: {aa: 11, bb: 22}, method:'get'
-  //   });
-  //   this.pageable.onAjaxComplete(() => {
-  //     console.log(this.pageable);
-  //   });
-  //   this.pageable.fromAjax();
-  // }
-
-  getCurrentPage() {
-    // this.pageable.changePage(this.pageable.pagingInfo);
-  }
-
-  getPageSize() {
-    // this.pageable.changePage(this.pageable.pagingInfo);
-  }
-
 }
