@@ -1,6 +1,6 @@
 import {Component, Renderer2, ViewContainerRef} from '@angular/core';
 import {ArrayCollection, TableData, TimeGr, TimeService} from '@rdkmaster/jigsaw';
-import {Http} from "@angular/http";
+import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -41,10 +41,18 @@ export class AppComponent {
 
   tableData: TableData;
 
-  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2 ,private http: Http) {
+  tabDatas;
+
+  resultDisplay = false;
+
+  tabSelectIndex = 0;
+
+
+  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2, private http: Http) {
     this.tableData = new TableData();
     this.tableData.http = http;
   }
+
   quickChoiceChange(quickChoice) {
     switch (quickChoice.id) {
       case '1':
@@ -73,6 +81,25 @@ export class AppComponent {
   }
 
   doSearch() {
-    this.tableData.fromAjax('mock-data/table/data.json');
+    this.resultDisplay = false;
+    // 清理数据
+    if (this.tabDatas && this.tabDatas.length !== 0) {
+      this.tabDatas.forEach(tabData => {
+        this[tabData.id].destroy();
+      })
+    }
+    if (this.displayType.id === '1') {
+      this.tableData.fromAjax('mock-data/table/data.json');
+    } else {
+      this.tabDatas = [{label: 'HTTP_XDR', id: 'HttpData', url: 'mock-data/table/data.json'},
+        {label: 'DNS_XDR', id: 'DnsData', url: 'mock-data/table/data.json'}];
+      this.tabDatas.forEach(tabData => {
+        this[tabData.id] = new TableData();
+        this[tabData.id].http = this.http;
+        this[tabData.id].fromAjax(tabData.url);
+      })
+    }
+
+    this.resultDisplay = true;
   }
 }

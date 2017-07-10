@@ -67,6 +67,14 @@
   <jigsaw-button (click)="doSearch()">查询</jigsaw-button>
 </div>
 <div class="result">
-  <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData"></jigsaw-table>
+  <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData" *ngIf="displayType.id==1"></jigsaw-table>
+  <jigsaw-tab *ngIf="displayType.id!=1 && resultDisplay" [(selectedIndex)]="tabSelectIndex">
+    <jigsaw-tab-pane *ngFor="let tabData of tabDatas">
+      <div jigsaw-title><span class="fa fa-gift"></span>{{tabData.label}}</div>
+      <div jigsaw-body>
+        <jigsaw-table maxHeight="550px" [data]="this[tabData.id]"></jigsaw-table>
+      </div>
+    </jigsaw-tab-pane>
+  </jigsaw-tab>
 </div>
 
