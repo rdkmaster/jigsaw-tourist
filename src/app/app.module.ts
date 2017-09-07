@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 
 import {
-  JigsawModule,
+  JigsawModule, JigsawRootModule,
   PopupService
 } from '@rdkmaster/jigsaw';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -40,6 +40,7 @@ export function HttpLoaderFactory(http: Http) {
         isolate: true
       }
     ),
+    JigsawRootModule
   ],
   providers: [PopupService],
   bootstrap: [AppComponent],
