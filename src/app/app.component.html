@@ -85,9 +85,9 @@
 
   <div class="result">
     <jigsaw-button (click)="customColumnDefine()" *ngIf="resultDisplay" style="float:right;margin-bottom: 5px">定制列显隐</jigsaw-button>
-    <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData" *ngIf="displayType.id==1"
+    <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData" *ngIf="displayType.id=='1'"
                   [columnDefines]="tableColumnDefine"></jigsaw-table>
-    <jigsaw-tab *ngIf="displayType.id!=1 && resultDisplay" [(selectedIndex)]="tabSelectIndex">
+    <jigsaw-tab *ngIf="displayType.id!='1' && resultDisplay" [(selectedIndex)]="tabSelectIndex">
       <jigsaw-tab-pane *ngFor="let tabData of tabDatas">
         <div jigsaw-title><span class="fa fa-gift"></span>{{tabData.label}}</div>
         <div jigsaw-body>

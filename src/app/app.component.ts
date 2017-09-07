@@ -31,6 +31,15 @@ export class AppComponent {
 
   selectedChoice = this.quickChoices[0];
 
+  status = false;
+
+  selectedPeriodTimes = [];
+
+  selectBusinessType = [];
+
+  selectInterface = [];
+
+  userInfo = '';
 
   businessTypes = [{label: 'LTE用户面', closable: false}, {label: 'LTE控制面', closable: false}];
 
