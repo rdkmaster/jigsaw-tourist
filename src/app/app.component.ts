@@ -1,8 +1,8 @@
 import {Component, Renderer2, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
 import {
   AdditionalColumnDefine,
-  ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService, TableCellCheckbox, TableData,
-  TableHeadCheckbox,
+  ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService, TableHeadCheckboxRenderer, TableData,
+  TableCellCheckboxRenderer,
   TimeGr,
   TimeService
 } from '@rdkmaster/jigsaw';
@@ -78,10 +78,10 @@ export class AppComponent {
   additionalColumns: AdditionalColumnDefine[] = [{
     pos: 0,
     header: {
-      renderer: TableHeadCheckbox,
+      renderer: TableHeadCheckboxRenderer,
     },
     cell: {
-      renderer: TableCellCheckbox
+      renderer: TableCellCheckboxRenderer
     }
   }];
 
@@ -154,13 +154,13 @@ export class AppComponent {
     }
     this.dialogInfo = this.popupService.popup(this.dialog);
     setTimeout(() => {
-      this.settingTable.getRenderers(0).forEach(renderer => {
+      /*this.settingTable.getRenderers(0).forEach(renderer => {
         if (this.displayType.id === '1') {
           this._setCheckBoxState(renderer, this.tableColumnDefine);
         } else {
           this._setCheckBoxState(renderer, this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine']);
         }
-      });
+      });*/
     })
   }
 
@@ -179,7 +179,7 @@ export class AppComponent {
     } else {
       this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'] = [];
     }
-    this.settingTable.getRenderers(0).forEach(renderer => {
+    /*this.settingTable.getRenderers(0).forEach(renderer => {
       const checkboxState = renderer.renderer.checkboxState;
       if (checkboxState.checked === 0) {
         if (this.displayType.id === '1') {
@@ -188,7 +188,7 @@ export class AppComponent {
           this._modifyColumnDefine(this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'], checkboxState.row);
         }
       }
-    });
+    });*/
     this.dialogInfo.dispose();
   }
 
