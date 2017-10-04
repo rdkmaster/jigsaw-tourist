@@ -1,12 +1,9 @@
 import {Component, Renderer2, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import {
-  AdditionalColumnDefine,
-  ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService, TableHeadCheckboxRenderer, TableData,
-  TableCellCheckboxRenderer,
-  TimeGr,
-  TimeService
+  AdditionalColumnDefine, ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService,
+  TableHeadCheckboxRenderer, TableData, TableCellCheckboxRenderer, TimeGr, TimeService
 } from '@rdkmaster/jigsaw';
-import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -86,7 +83,7 @@ export class AppComponent {
   }];
 
 
-  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2, private http: Http,
+  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2, private http: HttpClient,
               private popupService: PopupService) {
     this.tableData = new TableData();
     this.tableData.http = http;
