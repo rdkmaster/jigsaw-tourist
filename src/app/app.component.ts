@@ -1,13 +1,9 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
-  AdditionalColumnDefine,
-  ArrayCollection,
-  ColumnDefine,
-  JigsawTable,
-  PopupInfo,
-  PopupService, TableCellCheckboxRenderer,
-  TableData, TableHeadCheckboxRenderer,
+  AdditionalColumnDefine, ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService,
+  TableCellCheckboxRenderer, TableData,
+  TableHeadCheckboxRenderer,
   TimeGr,
   TimeService
 } from '@rdkmaster/jigsaw';
