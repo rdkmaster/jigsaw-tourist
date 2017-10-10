@@ -1,21 +1,16 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-
-import {AppComponent} from './app.component';
+import {RouterModule} from '@angular/router';
+import {TranslateModule} from '@ngx-translate/core';
+import {HttpClientModule} from '@angular/common/http';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {
-  JigsawModule, JigsawRootModule,
-  PopupService
+  JigsawModule, JigsawRootModule, PopupService, TableCellCheckboxRenderer,
+  TableHeadCheckboxRenderer
 } from '@rdkmaster/jigsaw';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpModule, Http} from '@angular/http';
-import {RouterModule} from '@angular/router';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 
-export function HttpLoaderFactory(http: Http) {
-  return new TranslateHttpLoader(http, 'app/i18n/', '.json');
-}
+import {AppComponent} from './app.component';
 
 
 @NgModule({
@@ -25,26 +20,20 @@ export function HttpLoaderFactory(http: Http) {
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    HttpModule,
+    HttpClientModule,
     RouterModule.forRoot([{
       path: '**',
       component: AppComponent
     }]),
+    TranslateModule.forRoot({}),
     JigsawModule,
-    TranslateModule.forRoot({
-        loader: {
-          provide: TranslateLoader,
-          useFactory: HttpLoaderFactory,
-          deps: [Http]
-        },
-        isolate: true
-      }
-    ),
     JigsawRootModule
   ],
   providers: [PopupService],
   bootstrap: [AppComponent],
-  entryComponents: []
+  entryComponents: [
+    TableHeadCheckboxRenderer, TableCellCheckboxRenderer
+  ]
 })
 export class AppModule {
 }

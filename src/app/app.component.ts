@@ -1,12 +1,16 @@
-import {Component, Renderer2, TemplateRef, ViewChild, ViewContainerRef} from '@angular/core';
+import {Component, TemplateRef, ViewChild} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {
   AdditionalColumnDefine,
-  ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService, TableCellCheckbox, TableData,
-  TableHeadCheckbox,
+  ArrayCollection,
+  ColumnDefine,
+  JigsawTable,
+  PopupInfo,
+  PopupService, TableCellCheckboxRenderer,
+  TableData, TableHeadCheckboxRenderer,
   TimeGr,
   TimeService
 } from '@rdkmaster/jigsaw';
-import {Http} from '@angular/http';
 
 @Component({
   selector: 'app-root',
@@ -78,16 +82,15 @@ export class AppComponent {
   additionalColumns: AdditionalColumnDefine[] = [{
     pos: 0,
     header: {
-      renderer: TableHeadCheckbox,
+      renderer: TableHeadCheckboxRenderer,
     },
     cell: {
-      renderer: TableCellCheckbox
+      renderer: TableCellCheckboxRenderer
     }
   }];
 
 
-  constructor(public viewContainerRef: ViewContainerRef, public renderer: Renderer2, private http: Http,
-              private popupService: PopupService) {
+  constructor(private http: HttpClient, private popupService: PopupService) {
     this.tableData = new TableData();
     this.tableData.http = http;
   }
@@ -153,15 +156,15 @@ export class AppComponent {
       this[this.tabDatas[this.tabSelectIndex].id].header.forEach(header => this.headerData.data.push([header]));
     }
     this.dialogInfo = this.popupService.popup(this.dialog);
-    setTimeout(() => {
-      this.settingTable.getRenderers(0).forEach(renderer => {
-        if (this.displayType.id === '1') {
-          this._setCheckBoxState(renderer, this.tableColumnDefine);
-        } else {
-          this._setCheckBoxState(renderer, this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine']);
-        }
-      });
-    })
+    // setTimeout(() => {
+    //   this.settingTable.getRenderers(0).forEach(renderer => {
+    //     if (this.displayType.id === '1') {
+    //       this._setCheckBoxState(renderer, this.tableColumnDefine);
+    //     } else {
+    //       this._setCheckBoxState(renderer, this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine']);
+    //     }
+    //   });
+    // })
   }
 
   _setCheckBoxState(renderer, tableColumnDefine: ColumnDefine[]) {
@@ -179,16 +182,16 @@ export class AppComponent {
     } else {
       this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'] = [];
     }
-    this.settingTable.getRenderers(0).forEach(renderer => {
-      const checkboxState = renderer.renderer.checkboxState;
-      if (checkboxState.checked === 0) {
-        if (this.displayType.id === '1') {
-          this._modifyColumnDefine(this.tableColumnDefine, checkboxState.row);
-        } else {
-          this._modifyColumnDefine(this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'], checkboxState.row);
-        }
-      }
-    });
+    // this.settingTable.getRenderers(0).forEach(renderer => {
+    //   const checkboxState = renderer.renderer.checkboxState;
+    //   if (checkboxState.checked === 0) {
+    //     if (this.displayType.id === '1') {
+    //       this._modifyColumnDefine(this.tableColumnDefine, checkboxState.row);
+    //     } else {
+    //       this._modifyColumnDefine(this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'], checkboxState.row);
+    //     }
+    //   }
+    // });
     this.dialogInfo.dispose();
   }
 
