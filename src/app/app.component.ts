@@ -1,7 +1,7 @@
 import {Component, TemplateRef, ViewChild} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {
-  AdditionalColumnDefine, ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService,
+  AdditionalColumnDefine, AdditionalTableData, ArrayCollection, ColumnDefine, JigsawTable, PopupInfo, PopupService,
   TableCellCheckboxRenderer, TableData,
   TableHeadCheckboxRenderer,
   TimeGr,
@@ -64,16 +64,23 @@ export class AppComponent {
 
   tabSelectIndex = 0;
 
-  headerData: TableData;
+  headerData: TableData = new TableData([], ['field'], ['名称']);
+
+  headerAdditionalData: AdditionalTableData = new AdditionalTableData();
 
   @ViewChild('dialog') dialog: TemplateRef<any>;
 
   dialogInfo: PopupInfo;
 
-  @ViewChild('settingTable') settingTable: JigsawTable;
-
-  tableColumnDefine: ColumnDefine[] = [];
-
+  tableColumnDefine: ColumnDefine[] = [
+    {target: 'time', visible: true},
+    {target: 'interface', visible: true},
+    {target: 'net', visible: true},
+    {target: 'ciid', visible: true},
+    {target: 'ciname', visible: true},
+    {target: 'apn', visible: true},
+    {target: 'duration', visible: true}
+  ];
 
   additionalColumns: AdditionalColumnDefine[] = [{
     pos: 0,
@@ -81,14 +88,19 @@ export class AppComponent {
       renderer: TableHeadCheckboxRenderer,
     },
     cell: {
-      renderer: TableCellCheckboxRenderer
+      renderer: TableCellCheckboxRenderer,
+      data: (td, row) => this.tableColumnDefine[row].visible
     }
   }];
-
 
   constructor(private http: HttpClient, private popupService: PopupService) {
     this.tableData = new TableData();
     this.tableData.http = http;
+    this.tableData.onAjaxComplete(() => {
+      this.tableData.header.forEach((field, index) => {
+        this.headerData.data[index] = [field];
+      });
+    });
   }
 
   quickChoiceChange(quickChoice) {
@@ -129,8 +141,10 @@ export class AppComponent {
     if (this.displayType.id === '1') {
       this.tableData.fromAjax('mock-data/table/data.json');
     } else {
-      this.tabDatas = [{label: 'HTTP_XDR', id: 'HttpData', url: 'mock-data/table/data.json'},
-        {label: 'DNS_XDR', id: 'DnsData', url: 'mock-data/table/data.json'}];
+      this.tabDatas = [
+        {label: 'HTTP_XDR', id: 'HttpData', url: 'mock-data/table/data.json'},
+        {label: 'DNS_XDR', id: 'DnsData', url: 'mock-data/table/data.json'}
+      ];
       this.tabDatas.forEach(tabData => {
         this[tabData.id] = new TableData();
         this[tabData.id].http = this.http;
@@ -143,56 +157,17 @@ export class AppComponent {
   }
 
   customColumnDefine() {
-    this.headerData = new TableData();
-    this.headerData.header = ['名称'];
-    this.headerData.field = ['name'];
-    if (this.displayType.id === '1') {
-      this.tableData.header.forEach(header => this.headerData.data.push([header]));
-    } else {
-      this[this.tabDatas[this.tabSelectIndex].id].header.forEach(header => this.headerData.data.push([header]));
-    }
     this.dialogInfo = this.popupService.popup(this.dialog);
-    // setTimeout(() => {
-    //   this.settingTable.getRenderers(0).forEach(renderer => {
-    //     if (this.displayType.id === '1') {
-    //       this._setCheckBoxState(renderer, this.tableColumnDefine);
-    //     } else {
-    //       this._setCheckBoxState(renderer, this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine']);
-    //     }
-    //   });
-    // })
   }
 
-  _setCheckBoxState(renderer, tableColumnDefine: ColumnDefine[]) {
-    if (tableColumnDefine && tableColumnDefine.length !== 0
-      && tableColumnDefine.filter(columnDefine => columnDefine.target === renderer.renderer.checkboxState.row).length !== 0) {
-      renderer.renderer.setCheckboxState(false);
-    } else {
-      renderer.renderer.setCheckboxState(true);
-    }
-  }
-
-  finishSetting() {
-    if (this.displayType.id === '1') {
-      this.tableColumnDefine = [];
-    } else {
-      this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'] = [];
-    }
-    // this.settingTable.getRenderers(0).forEach(renderer => {
-    //   const checkboxState = renderer.renderer.checkboxState;
-    //   if (checkboxState.checked === 0) {
-    //     if (this.displayType.id === '1') {
-    //       this._modifyColumnDefine(this.tableColumnDefine, checkboxState.row);
-    //     } else {
-    //       this._modifyColumnDefine(this[this.tabDatas[this.tabSelectIndex].id + 'ColumnDefine'], checkboxState.row);
-    //     }
-    //   }
-    // });
+  finishSetting(answer: string) {
     this.dialogInfo.dispose();
-  }
+    this.dialogInfo = null;
+    if (answer === 'cancel') {
+      return;
+    }
 
-  _modifyColumnDefine(tableColumnDefine: ColumnDefine[], row: number) {
-    tableColumnDefine.push({target: row, visible: false});
+    this.headerAdditionalData.data.forEach((visible, index) => this.tableColumnDefine[index].visible = !!visible[0]);
+    this.tableData.refresh();
   }
-
 }

@@ -1,8 +1,23 @@
-.condition{
+
+.condition {
+  display: flex;
   border-bottom: 2px solid #108ee9;
   padding-bottom: 5px;
+  line-height: 3.5;
+  flex-wrap: wrap;
 }
 
-.result{
-  padding-top:10px;
+.position-adjustment {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.vertical-align {
+  display: flex;
+  align-items: center;
+}
+
+.result {
+  padding-top: 10px;
 }
