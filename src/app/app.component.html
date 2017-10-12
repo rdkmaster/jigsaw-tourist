@@ -1,7 +1,7 @@
 <jigsaw-root>
   <div class="condition">
-    <div class="position-adjustment">
-      <div class="vertical-align"><span>时间选择 ：</span>
+    <div class="justifyfull">
+      <div class="vertically"><span>时间选择 ：</span>
         <jigsaw-combo-select [(value)]="rangeTimeComboValue" openTrigger="click">
           <ng-template>
             <jigsaw-range-time [(beginDate)]="beginDate"
@@ -11,7 +11,7 @@
           </ng-template>
         </jigsaw-combo-select>
       </div>
-      <div class="vertical-align">
+      <div class="vertically">
         <jigsaw-checkbox [enableIndeterminate]="false" [(checked)]="status">多时段设置</jigsaw-checkbox>
         <jigsaw-combo-select [(value)]="selectedPeriodTimes" openTrigger="click" [disabled]="!status">
           <ng-template>
@@ -25,7 +25,7 @@
           </ng-template>
         </jigsaw-combo-select>
       </div>
-      <div class="vertical-align"><span>快速选择 ：</span>
+      <div class="vertically"><span>快速选择 ：</span>
         <jigsaw-radios (valueChange)="quickChoiceChange($event)"
                        trackItemBy="id" [(value)]="selectedChoice">
           <jigsaw-radio-option *ngFor="let quickChoice of quickChoices" [value]="quickChoice">{{quickChoice.label}}
@@ -33,8 +33,8 @@
         </jigsaw-radios>
       </div>
     </div>
-    <div class="position-adjustment">
-      <div class="vertical-align">
+    <div class="justifyfull">
+      <div class="vertically">
         <span>业务类型 ：</span>
         <jigsaw-combo-select [(value)]="selectBusinessType" openTrigger="click" width="400px">
           <ng-template>
@@ -49,7 +49,7 @@
           </ng-template>
         </jigsaw-combo-select>
       </div>
-      <div class="vertical-align">
+      <div class="vertically">
         <span>接口 ：</span>
         <jigsaw-combo-select [(value)]="selectInterface" openTrigger="click" width="400px">
           <ng-template>
@@ -64,8 +64,8 @@
         </jigsaw-combo-select>
       </div>
     </div>
-    <div class="position-adjustment">
-      <div class="vertical-align">
+    <div class="justifyfull">
+      <div class="vertically">
         <span>查询条件 ：</span>
         <jigsaw-combo-select [(value)]="selectUserType" openTrigger="click" width="120px">
           <ng-template>
@@ -81,7 +81,7 @@
         </jigsaw-combo-select>
         <jigsaw-input [(value)]="userInfo" height="32px"></jigsaw-input>
       </div>
-      <div class="vertical-align">
+      <div class="vertically">
         <span>显示方式：</span>
         <jigsaw-radios (valueChange)="displayTypeChange($event)"
                        trackItemBy="id" [(value)]="displayType">
@@ -89,7 +89,7 @@
           </jigsaw-radio-option>
         </jigsaw-radios>
       </div>
-      <div class="vertical-align">
+      <div class="vertically">
         <span>最大查询记录数 ：</span>
         <jigsaw-input [(value)]="maxRecord" height="32px"></jigsaw-input>
         <jigsaw-button (click)="doSearch()">查询</jigsaw-button>

@@ -7,13 +7,13 @@
   flex-wrap: wrap;
 }
 
-.position-adjustment {
+.justifyfull {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
 
-.vertical-align {
+.vertically {
   display: flex;
   align-items: center;
 }
