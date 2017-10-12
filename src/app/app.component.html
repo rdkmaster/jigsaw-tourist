@@ -1,107 +1,129 @@
 <jigsaw-root>
   <div class="condition">
-    <span>时间选择:</span>
-    <jigsaw-combo-select [(value)]="rangeTimeComboValue" openTrigger="click">
-      <ng-template>
-        <jigsaw-range-time
-          [(beginDate)]="beginDate"
-          [(endDate)]="endDate"
-          (change)="handleChange($event)">
-        </jigsaw-range-time>
-      </ng-template>
-    </jigsaw-combo-select>
-    <jigsaw-checkbox [enableIndeterminate]="false" [(checked)]="status">多时段设置</jigsaw-checkbox>
-    <jigsaw-combo-select [(value)]="selectedPeriodTimes" openTrigger="click" [disabled]="!status">
-      <ng-template>
-        <jigsaw-tile
-          [(selectedItems)]="selectedPeriodTimes"
-          trackItemBy="label"
-          width="350px">
-          <jigsaw-tile-option *ngFor="let periodTime of periodTimes" [value]="periodTime" width="100px">
-            {{periodTime.label}}
-          </jigsaw-tile-option>
-        </jigsaw-tile>
-      </ng-template>
-    </jigsaw-combo-select>
-    <span>快速选择:</span>
-    <jigsaw-radios (valueChange)="quickChoiceChange($event)"
-                   trackItemBy="id" [(value)]="selectedChoice">
-      <jigsaw-radio-option *ngFor="let quickChoice of quickChoices" [value]="quickChoice">{{quickChoice.label}}</jigsaw-radio-option>
-    </jigsaw-radios>
-    <br>
-    <span>业务类型:</span>
-    <jigsaw-combo-select [(value)]="selectBusinessType" openTrigger="click" width="400px">
-      <ng-template>
-        <jigsaw-tile
-          [(selectedItems)]="selectBusinessType"
-          trackItemBy="label"
-          [multipleSelect]="false"
-          width="350px">
-          <jigsaw-tile-option *ngFor="let businessType of businessTypes" [value]="businessType" width="100px">
-            {{businessType.label}}
-          </jigsaw-tile-option>
-        </jigsaw-tile>
-      </ng-template>
-    </jigsaw-combo-select>
-
-    <span>接口：</span>
-    <jigsaw-combo-select [(value)]="selectInterface" openTrigger="click" width="400px">
-      <ng-template>
-        <jigsaw-tile
-          [(selectedItems)]="selectInterface"
-          trackItemBy="label"
-          width="350px">
-          <jigsaw-tile-option *ngFor="let interface of interfaces" [value]="interface" width="100px">
-            {{interface.label}}
-          </jigsaw-tile-option>
-        </jigsaw-tile>
-      </ng-template>
-    </jigsaw-combo-select>
-    <br>
-    <span>查询条件:</span>
-    <jigsaw-combo-select [(value)]="selectUserType" openTrigger="click" width="120px">
-      <ng-template>
-        <jigsaw-tile
-          [(selectedItems)]="selectUserType"
-          trackItemBy="label"
-          [multipleSelect]="false"
-          width="100px">
-          <jigsaw-tile-option *ngFor="let userType of userTypes" [value]="userType" width="100px">
-            {{userType.label}}
-          </jigsaw-tile-option>
-        </jigsaw-tile>
-      </ng-template>
-    </jigsaw-combo-select>
-    <jigsaw-input [(value)]="userInfo" height="32px"></jigsaw-input>
-    <span style="margin-left:100px">显示方式：</span>
-    <jigsaw-radios (valueChange)="displayTypeChange($event)"
-                   trackItemBy="id" [(value)]="displayType">
-      <jigsaw-radio-option *ngFor="let displayType of displayTypes" [value]="displayType">{{displayType.label}}</jigsaw-radio-option>
-    </jigsaw-radios>
-    <span>最大查询记录数：</span>
-    <jigsaw-input [(value)]="maxRecord" height="32px"></jigsaw-input>
-    <jigsaw-button (click)="doSearch()">查询</jigsaw-button>
+    <div class="justifyfull">
+      <div class="vertically"><span>时间选择 ：</span>
+        <jigsaw-combo-select [(value)]="rangeTimeComboValue" openTrigger="click">
+          <ng-template>
+            <jigsaw-range-time [(beginDate)]="beginDate"
+                               [(endDate)]="endDate"
+                               (change)="handleChange($event)">
+            </jigsaw-range-time>
+          </ng-template>
+        </jigsaw-combo-select>
+      </div>
+      <div class="vertically">
+        <jigsaw-checkbox [enableIndeterminate]="false" [(checked)]="status">多时段设置</jigsaw-checkbox>
+        <jigsaw-combo-select [(value)]="selectedPeriodTimes" openTrigger="click" [disabled]="!status">
+          <ng-template>
+            <jigsaw-tile [(selectedItems)]="selectedPeriodTimes"
+                         trackItemBy="label"
+                         width="350px">
+              <jigsaw-tile-option *ngFor="let periodTime of periodTimes" [value]="periodTime" width="100px">
+                {{periodTime.label}}
+              </jigsaw-tile-option>
+            </jigsaw-tile>
+          </ng-template>
+        </jigsaw-combo-select>
+      </div>
+      <div class="vertically"><span>快速选择 ：</span>
+        <jigsaw-radios (valueChange)="quickChoiceChange($event)"
+                       trackItemBy="id" [(value)]="selectedChoice">
+          <jigsaw-radio-option *ngFor="let quickChoice of quickChoices" [value]="quickChoice">{{quickChoice.label}}
+          </jigsaw-radio-option>
+        </jigsaw-radios>
+      </div>
+    </div>
+    <div class="justifyfull">
+      <div class="vertically">
+        <span>业务类型 ：</span>
+        <jigsaw-combo-select [(value)]="selectBusinessType" openTrigger="click" width="400px">
+          <ng-template>
+            <jigsaw-tile [(selectedItems)]="selectBusinessType"
+                         trackItemBy="label"
+                         [multipleSelect]="false"
+                         width="350px">
+              <jigsaw-tile-option *ngFor="let businessType of businessTypes" [value]="businessType" width="100px">
+                {{businessType.label}}
+              </jigsaw-tile-option>
+            </jigsaw-tile>
+          </ng-template>
+        </jigsaw-combo-select>
+      </div>
+      <div class="vertically">
+        <span>接口 ：</span>
+        <jigsaw-combo-select [(value)]="selectInterface" openTrigger="click" width="400px">
+          <ng-template>
+            <jigsaw-tile [(selectedItems)]="selectInterface"
+                         trackItemBy="label"
+                         width="350px">
+              <jigsaw-tile-option *ngFor="let interface of interfaces" [value]="interface" width="100px">
+                {{interface.label}}
+              </jigsaw-tile-option>
+            </jigsaw-tile>
+          </ng-template>
+        </jigsaw-combo-select>
+      </div>
+    </div>
+    <div class="justifyfull">
+      <div class="vertically">
+        <span>查询条件 ：</span>
+        <jigsaw-combo-select [(value)]="selectUserType" openTrigger="click" width="120px">
+          <ng-template>
+            <jigsaw-tile [(selectedItems)]="selectUserType"
+                         trackItemBy="label"
+                         [multipleSelect]="false"
+                         width="100px">
+              <jigsaw-tile-option *ngFor="let userType of userTypes" [value]="userType" width="100px">
+                {{userType.label}}
+              </jigsaw-tile-option>
+            </jigsaw-tile>
+          </ng-template>
+        </jigsaw-combo-select>
+        <jigsaw-input [(value)]="userInfo" height="32px"></jigsaw-input>
+      </div>
+      <div class="vertically">
+        <span>显示方式：</span>
+        <jigsaw-radios (valueChange)="displayTypeChange($event)"
+                       trackItemBy="id" [(value)]="displayType">
+          <jigsaw-radio-option *ngFor="let displayType of displayTypes" [value]="displayType">{{displayType.label}}
+          </jigsaw-radio-option>
+        </jigsaw-radios>
+      </div>
+      <div class="vertically">
+        <span>最大查询记录数 ：</span>
+        <jigsaw-input [(value)]="maxRecord" height="32px"></jigsaw-input>
+        <jigsaw-button (click)="doSearch()">查询</jigsaw-button>
+      </div>
+    </div>
   </div>
 
   <div class="result">
-    <jigsaw-button (click)="customColumnDefine()" *ngIf="resultDisplay" style="float:right;margin-bottom: 5px">定制列显隐</jigsaw-button>
+    <jigsaw-button (click)="customColumnDefine()" *ngIf="resultDisplay" style="float:right;margin-bottom: 5px">定制列显隐
+    </jigsaw-button>
     <jigsaw-table style="margin-bottom: 10px;" maxHeight="550px" [data]="tableData" *ngIf="displayType.id=='1'"
                   [columnDefines]="tableColumnDefine"></jigsaw-table>
-    <jigsaw-tab *ngIf="displayType.id!='1' && resultDisplay" [(selectedIndex)]="tabSelectIndex">
+    <jigsaw-tab *ngIf="displayType.id=='2'" [(selectedIndex)]="tabSelectIndex">
       <jigsaw-tab-pane *ngFor="let tabData of tabDatas">
-        <div jigsaw-title><span class="fa fa-gift"></span>{{tabData.label}}</div>
-        <div jigsaw-body>
-          <jigsaw-table maxHeight="550px" [data]="this[tabData.id]" [columnDefines]="this[tabData.id+'ColumnDefine']"></jigsaw-table>
-        </div>
+        <div jigsaw-title><span class="fa fa-gift"></span>111111</div>
+        <ng-template>
+          <jigsaw-table maxHeight="550px" [data]="this[tabData.id]"
+                        [columnDefines]="this[tabData.id+'ColumnDefine']">
+          </jigsaw-table>
+        </ng-template>
       </jigsaw-tab-pane>
     </jigsaw-tab>
 
     <ng-template #dialog>
-      <jigsaw-dialog width="60%" (answer)="finishSetting()">
+      <jigsaw-dialog width="60%" (answer)="finishSetting('cancel')">
         <div jigsaw-title>列头控制</div>
         <div jigsaw-body>
-          <jigsaw-table [data]="headerData" [additionalColumnDefines]="additionalColumns" #settingTable></jigsaw-table>
-          <div style="margin:5px 0px;text-align:center"><jigsaw-button (click)="finishSetting()">完成设置</jigsaw-button></div>
+          <jigsaw-table [data]="headerData"
+                        [additionalColumnDefines]="additionalColumns"
+                        [(additionalData)]="headerAdditionalData">
+          </jigsaw-table>
+          <div style="margin:5px 0px;text-align:center">
+            <jigsaw-button (click)="finishSetting('apply')">完成设置</jigsaw-button>
+          </div>
         </div>
       </jigsaw-dialog>
     </ng-template>
