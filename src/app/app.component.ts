@@ -73,12 +73,12 @@ export class AppComponent {
   dialogInfo: PopupInfo;
 
   tableColumnDefine: ColumnDefine[] = [
-    {target: 'time', visible: true},
+    {target: 'time', visible: true, width: 150},
     {target: 'interface', visible: true},
     {target: 'net', visible: true},
     {target: 'ciid', visible: true},
     {target: 'ciname', visible: true},
-    {target: 'apn', visible: true},
+    {target: 'apn', visible: true, width: 230},
     {target: 'duration', visible: true}
   ];
 
