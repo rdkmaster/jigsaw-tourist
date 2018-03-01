@@ -6,7 +6,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import {
-  JigsawModule, JigsawRootModule, PopupService, TableCellCheckboxRenderer,
+  JigsawModule, PopupService, TableCellCheckboxRenderer,
   TableHeadCheckboxRenderer
 } from '@rdkmaster/jigsaw';
 
@@ -26,8 +26,7 @@ import {AppComponent} from './app.component';
       component: AppComponent
     }]),
     TranslateModule.forRoot({}),
-    JigsawModule,
-    JigsawRootModule
+    JigsawModule
   ],
   providers: [PopupService],
   bootstrap: [AppComponent],
