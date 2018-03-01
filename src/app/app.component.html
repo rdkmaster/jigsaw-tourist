@@ -36,7 +36,7 @@
     <div class="justifyfull">
       <div class="vertically">
         <span>业务类型 ：</span>
-        <jigsaw-combo-select [(value)]="selectBusinessType" openTrigger="click" width="400px">
+        <jigsaw-combo-select [(value)]="selectBusinessType" [autoClose]="true" openTrigger="click" width="400px">
           <ng-template>
             <jigsaw-tile [(selectedItems)]="selectBusinessType"
                          trackItemBy="label"
@@ -67,7 +67,7 @@
     <div class="justifyfull">
       <div class="vertically">
         <span>查询条件 ：</span>
-        <jigsaw-combo-select [(value)]="selectUserType" openTrigger="click" width="120px">
+        <jigsaw-combo-select [(value)]="selectUserType" [autoClose]="true" openTrigger="click" width="120px">
           <ng-template>
             <jigsaw-tile [(selectedItems)]="selectUserType"
                          trackItemBy="label"
@@ -104,7 +104,7 @@
                   [columnDefines]="tableColumnDefine"></jigsaw-table>
     <jigsaw-tab *ngIf="displayType.id=='2'" [(selectedIndex)]="tabSelectIndex">
       <jigsaw-tab-pane *ngFor="let tabData of tabDatas">
-        <div jigsaw-title><span class="fa fa-gift"></span>111111</div>
+        <div jigsaw-title><span class="fa fa-gift"></span>{{tabData.label}}</div>
         <ng-template>
           <jigsaw-table maxHeight="550px" [data]="this[tabData.id]"
                         [columnDefines]="this[tabData.id+'ColumnDefine']">
