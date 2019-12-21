@@ -26,7 +26,9 @@
     "ngx-perfect-scrollbar": "~5.0.2",
     "rxjs": "~5.5.0",
     "web-animations-js": "~2.3.1",
-    "zone.js": "~0.8.18"
+    "zone.js": "~0.8.18",
+    "jszip": "3.2.1",
+    "file-saver": "~2.0.1"
   },
   "devDependencies": {
     "@angular/cli": "^1.5.0",
