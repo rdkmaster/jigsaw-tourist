@@ -64,7 +64,7 @@ export class AppComponent {
 
   headerAdditionalData: AdditionalTableData = new AdditionalTableData();
 
-  @ViewChild('dialog') dialog: TemplateRef<any>;
+  @ViewChild('dialog', {static: true}) dialog: TemplateRef<any>;
 
   dialogInfo: PopupInfo;
 
