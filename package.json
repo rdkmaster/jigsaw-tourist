@@ -41,7 +41,6 @@
     "@types/jasmine": "~2.5.45",
     "@types/node": "~12.11.1",
     "codelyzer": "~5.1.2",
-    "eonasdan-bootstrap-datetimepicker": "~4.17.47",
     "font-awesome": "~4.7.0",
     "jquery": "~3.4.1",
     "jasmine-core": "~2.6.2",
